@@ -10,8 +10,6 @@ const CustomWorkOutCard = (props) => {
   return (
     <Container>
       <Col md={6}>
-        <ComboReader timePerCombo={{ seconds: 1000 }} />
-
         <CreateRoundsList />
         <TotalWorkOutCart />
         <LinkContainer to="/Home">

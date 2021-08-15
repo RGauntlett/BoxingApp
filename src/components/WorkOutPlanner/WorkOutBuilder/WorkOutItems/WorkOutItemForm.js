@@ -48,7 +48,7 @@ const WorkOutItemForm = (props) => {
         input={{
           id: "length_" + props.id,
           type: "number",
-          min: "1",
+          min: ".5",
           max: "5",
           step: ".5",
           defaultValue: "1",

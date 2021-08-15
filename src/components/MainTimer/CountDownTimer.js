@@ -1,29 +1,20 @@
 import React, { useContext, useState } from "react";
+import { Redirect } from "react-router";
 import TotalWorkOutContext from "../../store/TotalWorkOut-context";
+import ComboReader from "../ComboReader/ComboReader";
 
 const CountDownTimer = (props) => {
-  let initTime = props.customWorkOut[0].lengthOfRounds;
-  let minutes = Math.floor(initTime);
-  let seconds = (initTime * 60) % 60;
+  const customWorkOut = props.routine;
+
+  let minutes = Math.floor(customWorkOut[0].lengthOfRounds);
+  let seconds = (customWorkOut[0].lengthOfRounds * 60) % 60;
   // For the number of rounds add a round object to the rounds array
   const [[mins, secs], setTime] = useState([minutes, seconds]);
-  console.log([mins, secs]);
-
   const [roundCounter, setRoundCounter] = useState(0);
 
-  const newTimer = (x) => {
-    minutes = Math.floor(props.customWorkOut[x].lengthOfRounds);
-    seconds = (props.customWorkOut[x].lengthOfRounds * 60) % 60;
-    setTime([minutes, seconds]);
-  };
-
   const tick = () => {
-    if (
-      props.customWorkOut.length === roundCounter &&
-      mins === 0 &&
-      secs === 0
-    ) {
-      return <h3>End of WorkOut</h3>;
+    if (customWorkOut.length === roundCounter && mins === 0 && secs === 0) {
+      newTimer(0);
     } else if (mins === 0 && secs === 0) {
       setRoundCounter(roundCounter + 1);
       newTimer(roundCounter + 1);
@@ -39,11 +30,55 @@ const CountDownTimer = (props) => {
     return () => clearInterval(timerId);
   });
 
+  const newTimer = (roundCounter) => {
+    if (roundCounter === 0) {
+      props.onEndWorkOut();
+
+      return <Redirect to="Home" />;
+    } else {
+      minutes = Math.floor(customWorkOut[roundCounter].lengthOfRounds);
+      seconds = (customWorkOut[roundCounter].lengthOfRounds * 60) % 60;
+      setTime([minutes, seconds]);
+    }
+  };
+
   return (
     <div>
-      <h4>
-        {mins}:{secs}
-      </h4>
+      {!customWorkOut.length > 0 && (
+        <p>Please Enter Workouts to Build Your Routine</p>
+      )}
+      {customWorkOut.length !== roundCounter && (
+        <div>
+          {customWorkOut[roundCounter].type === "Guided ShadowBoxing" && (
+            <ComboReader timePerCombo={{ seconds: 1000 }} />
+          )}
+
+          {customWorkOut.length > 0 && (
+            <div>
+              <h4>
+                {`${mins.toString().padStart(2, "0")}:${secs
+                  .toString()
+                  .padStart(2, "0")}`}
+              </h4>
+
+              <div>
+                <h2>Round Type: </h2>
+                <p>{customWorkOut[roundCounter].type}</p>
+              </div>
+              <div>
+                <h2>Length Of Round: </h2>
+                <p>{customWorkOut[roundCounter].lengthOfRounds}</p>
+              </div>
+              <div>
+                <h2>Round:</h2>
+                <p>
+                  {roundCounter + 1}/{customWorkOut.length}
+                </p>
+              </div>
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 };
@@ -62,44 +97,25 @@ const CreateRoundsList = () => {
       });
     }
   });
-  console.log(roundsList);
-  const totalRounds = roundsList.length;
 
   const [totalWorkOut, setTotalWorkOut] = useState(roundsList);
-  const hasWorkOuts = totalWorkOut.length > 0;
 
-  const removeRoundHandler = () => {
-    let removedWorkOut = totalWorkOut.shift();
-    setTotalWorkOut(totalWorkOut);
-    console.log(totalWorkOut);
-    console.log(removedWorkOut);
+  const endOfWorkOutHandler = () => {
+    setTotalWorkOut([]);
   };
 
   return (
     <div>
       <div>
-        {hasWorkOuts && (
+        {totalWorkOut.length > 0 && (
           <CountDownTimer
-            customWorkOut={totalWorkOut}
-            onRemove={removeRoundHandler}
+            routine={totalWorkOut}
+            onEndWorkOut={endOfWorkOutHandler}
           />
         )}
-        {!hasWorkOuts && <p>Please Enter Workouts to Build Your Routine</p>}
-      </div>
-      <div>
-        <h2>Round Type: </h2>
-        {hasWorkOuts && <p>{totalWorkOut[0].type}</p>}
-        {!hasWorkOuts && <p>No Workout Entered</p>}
-      </div>
-      <div>
-        <h2>Length Of Round: </h2>
-        {hasWorkOuts && <p>{totalWorkOut[0].lengthOfRounds}</p>}
-        {!hasWorkOuts && <p>00:00</p>}
-      </div>
-      <div>
-        <h2>Round:</h2>
-        {hasWorkOuts && <p>1/{totalRounds}</p>}
-        {!hasWorkOuts && <p>0/0</p>}
+        {totalWorkOut.length === 0 && (
+          <p>Please Enter Workouts to Build Your Routine</p>
+        )}
       </div>
     </div>
   );
