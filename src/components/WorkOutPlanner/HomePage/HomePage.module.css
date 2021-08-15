@@ -1,0 +1,19 @@
+.HomePage div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.HomePage h1 {
+  color: #ccad8f;
+  text-decoration: underline;
+}
+
+.NavigationButton {
+  display: flex;
+  justify-content: center;
+}
+
+.NavigationButton button {
+  margin: 3%;
+}

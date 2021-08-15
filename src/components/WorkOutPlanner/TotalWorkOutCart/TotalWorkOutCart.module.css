@@ -1,0 +1,34 @@
+.TotalWorkOutCart {
+  height: auto;
+  width: auto;
+  border: 0.3rem solid #ccad8f;
+  margin: 3%;
+}
+
+.TotalWorkOutCart h2 {
+  color: white;
+  font-weight: bold;
+  padding-left: 5%;
+}
+
+.TotalWorkOutCart h3 {
+  display: flex;
+}
+
+.TotalWorkOutCart p {
+  color: white;
+  display: flex;
+  margin-left: 5%;
+}
+
+.TotalWorkOutCart ul {
+  color: white;
+  padding-left: 10%;
+}
+
+.TotalWorkOutCartItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: 5%;
+}

@@ -1,0 +1,36 @@
+.form {
+  text-align: right;
+  display: flex;
+  align-content: flex-end;
+  justify-content: flex-end;
+}
+
+.form label {
+  color: white;
+  font-size: small;
+}
+
+.form input {
+  margin-right: 5%;
+  margin-left: 5%;
+  max-width: fit-content;
+}
+
+.form button {
+  font: inherit;
+  cursor: pointer;
+  background-color: #255c99;
+  border: 1px solid #255c99;
+  color: white;
+  padding: 0.25rem 2rem;
+  border-radius: 20px;
+  font-weight: bold;
+  margin-right: 5%;
+  margin-left: 5%;
+}
+
+.form button:hover,
+.form button:active {
+  background-color: #ccad8f;
+  border-color: #ccad8f;
+}

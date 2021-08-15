@@ -1,0 +1,17 @@
+.PageButton {
+  background-color: #255c99;
+  color: white;
+  font: inherit;
+  font-weight: bold;
+  border-color: #7ea3cc;
+  border-radius: 20px;
+  height: 2rem;
+  align-self: center;
+  justify-self: center;
+}
+
+.PageButton:hover {
+  transform: scale(1.05);
+  background-color: #ccad8f;
+  border-color: #ccad8f;
+}

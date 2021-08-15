@@ -1,0 +1,32 @@
+.InformationPage {
+  margin: 3%;
+  margin-top: 1%;
+  display: flex;
+  justify-content: center;
+}
+
+.Title {
+  margin: 5%;
+}
+
+.InformationPage h1 {
+  margin-right: 1%;
+  color: white;
+}
+
+.PunchNumbers {
+  justify-content: center;
+}
+.PunchNumbers h3 {
+  display: block;
+}
+.PunchNumbers p {
+  display: block;
+}
+
+.Library {
+  display: inline-block;
+  justify-content: center;
+  margin: 3%;
+  margin-top: 1%;
+}
