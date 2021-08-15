@@ -1,5 +1,4 @@
 import React, { useContext, useState, useEffect } from "react";
-import { Redirect } from "react-router";
 import TotalWorkOutContext from "../../store/TotalWorkOut-context";
 import ComboReader from "../ComboReader/ComboReader";
 import styles from "./CountDownTimer.module.css";
@@ -43,19 +42,19 @@ const CountDownTimer = (props) => {
   // };
 
   useEffect(() => {
+    const Tick = (roundTime) => {
+      if (roundTime === 0) {
+        setRoundCounter(roundCounter + 1);
+        setRoundTime(customWorkOut[roundCounter].lengthOfRounds * 60);
+        setCustomWorkOut([]);
+      } else setRoundTime(roundTime - 1);
+    };
+
     const timer = setTimeout(() => {
       Tick(roundTime);
     }, 1000);
     return () => clearTimeout(timer);
   }, [roundTime]);
-
-  const Tick = (roundTime) => {
-    if (roundTime === 0) {
-      setRoundCounter(roundCounter + 1);
-      setRoundTime(customWorkOut[roundCounter].lengthOfRounds * 60);
-      setCustomWorkOut([]);
-    } else setRoundTime(roundTime - 1);
-  };
 
   return (
     <div>

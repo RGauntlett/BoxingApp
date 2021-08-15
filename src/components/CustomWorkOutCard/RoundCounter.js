@@ -1,4 +1,4 @@
-import { Container, Col, Row } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import { useContext } from "react";
 import TotalWorkOutContext from "../../store/TotalWorkOut-context";
 
