@@ -15,10 +15,10 @@ const totalWorkOutReducer = (state, action) => {
   }
 
   if (action.type === "REMOVE_WorkOut") {
-    const existingWorkOutIndex = state.workOuts.findIndex(
-      (workOut) => workOut.id === action.id
+    updatedTotalWorkOut = state.workOuts.filter(
+      (workOut) => workOut.id !== action.id
     );
-    // const existingWorkOut = state.workOuts(existingWorkOutIndex);
+    return { workOuts: updatedTotalWorkOut };
   }
 };
 

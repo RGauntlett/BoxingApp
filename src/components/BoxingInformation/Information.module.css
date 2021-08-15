@@ -9,16 +9,22 @@
   margin: 5%;
 }
 
+.Title button {
+  height: fit-content;
+}
+
 .InformationPage h1 {
   margin-right: 1%;
-  color: white;
+  color: #ccad8f;
 }
 
 .PunchNumbers {
   justify-content: center;
+  color: white;
 }
 .PunchNumbers h3 {
   display: block;
+  color: #ccad8f;
 }
 .PunchNumbers p {
   display: block;
@@ -29,4 +35,5 @@
   justify-content: center;
   margin: 3%;
   margin-top: 1%;
+  color: #ccad8f;
 }

@@ -12,9 +12,10 @@ const CountDownTimer = (props) => {
   const [[mins, secs], setTime] = useState([minutes, seconds]);
   const [roundCounter, setRoundCounter] = useState(0);
 
-  const tick = () => {
+  const tick = (timerId) => {
     if (customWorkOut.length === roundCounter && mins === 0 && secs === 0) {
-      newTimer(0);
+      clearInterval(timerId);
+      return <Redirect to="/Home" />;
     } else if (mins === 0 && secs === 0) {
       setRoundCounter(roundCounter + 1);
       newTimer(roundCounter + 1);
@@ -26,20 +27,14 @@ const CountDownTimer = (props) => {
   };
 
   React.useEffect(() => {
-    const timerId = setInterval(() => tick(), 1000);
+    const timerId = setInterval(() => tick(timerId), 1000);
     return () => clearInterval(timerId);
   });
 
   const newTimer = (roundCounter) => {
-    if (roundCounter === 0) {
-      props.onEndWorkOut();
-
-      return <Redirect to="Home" />;
-    } else {
-      minutes = Math.floor(customWorkOut[roundCounter].lengthOfRounds);
-      seconds = (customWorkOut[roundCounter].lengthOfRounds * 60) % 60;
-      setTime([minutes, seconds]);
-    }
+    minutes = Math.floor(customWorkOut[roundCounter].lengthOfRounds);
+    seconds = (customWorkOut[roundCounter].lengthOfRounds * 60) % 60;
+    setTime([minutes, seconds]);
   };
 
   return (
