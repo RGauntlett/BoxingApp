@@ -8,6 +8,7 @@ const defaultTotalWorkOutState = {
 const totalWorkOutReducer = (state, action) => {
   let updatedTotalWorkOut;
   if (action.type === "ADD_WorkOut") {
+    action.workOut.id = "_" + Math.random().toString(36).substr(2, 9);
     updatedTotalWorkOut = state.workOuts.concat(action.workOut);
     return {
       workOuts: updatedTotalWorkOut,

@@ -1,0 +1,54 @@
+.ComboReader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Timer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0.3rem solid #ccad8f;
+  color: white;
+  font-size: 3rem;
+  font-weight: bold;
+  margin: 2%;
+  margin-bottom: 0%;
+}
+
+.RoundContent {
+  display: flex;
+  justify-content: space-evenly;
+  width: 80%;
+  margin-top: 2%;
+  margin-right: 10%;
+  margin-left: 10%;
+}
+
+.RoundContent h2 {
+  display: flex;
+  justify-content: center;
+}
+
+.RoundContent p {
+  display: flex;
+  justify-content: center;
+  font-size: large;
+}
+
+.RoundType {
+  justify-content: center;
+  border: 0.3rem solid #ccad8f;
+  color: white;
+}
+
+.LengthReader {
+  justify-items: center;
+  border: 0.3rem solid #ccad8f;
+  color: white;
+}
+
+.RoundCounter {
+  border: 0.3rem solid #ccad8f;
+  color: white;
+}
