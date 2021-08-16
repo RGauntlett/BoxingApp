@@ -7,6 +7,7 @@ const WorkOutItemForm = (props) => {
   const [amountIsValid, setAmountIsValid] = useState(true);
   const amountInputRef = useRef();
   const lengthInputRef = useRef();
+  const restInputRef = useRef();
 
   const submitHandler = (event) => {
     event.preventDefault();
@@ -15,24 +16,31 @@ const WorkOutItemForm = (props) => {
     const enteredAmountNumber = +enteredAmount;
     const enteredLength = lengthInputRef.current.value;
     const enteredLengthNumber = +enteredLength;
+    const enteredRest = restInputRef.current.value;
+    const enteredRestNumber = +enteredRest;
 
     if (
       (enteredAmount.trim().length === 0 &&
-        enteredLength.trim().length === 0) ||
-      (enteredAmountNumber < 1 && enteredLength < 1) ||
-      (enteredAmountNumber > 12 && enteredLength > 5)
+        enteredLength.trim().length === 0 &&
+        enteredRest.trim.length === 0) ||
+      (enteredAmount < 1 && enteredLength < 1 && enteredRest < 0.5) ||
+      (enteredAmount > 12 && enteredLength > 5 && enteredRest > 2)
     ) {
       setAmountIsValid(false);
       return;
     }
-    props.onAddWorkOut(enteredAmountNumber, enteredLengthNumber);
+    props.onAddWorkOut(
+      enteredAmountNumber,
+      enteredLengthNumber,
+      enteredRestNumber
+    );
   };
 
   return (
     <form className={styles.form}>
       <Input
         ref={amountInputRef}
-        label="Number of Rounds: "
+        label="Rounds: "
         input={{
           id: "amount_" + props.id,
           type: "number",
@@ -44,7 +52,7 @@ const WorkOutItemForm = (props) => {
       />
       <Input
         ref={lengthInputRef}
-        label="Length of Rounds: "
+        label="Time: "
         input={{
           id: "length_" + props.id,
           type: "number",
@@ -52,6 +60,19 @@ const WorkOutItemForm = (props) => {
           max: "5",
           step: ".5",
           defaultValue: "1",
+        }}
+      />
+
+      <Input
+        ref={restInputRef}
+        label="Rest: "
+        input={{
+          id: "rest_" + props.id,
+          type: "number",
+          min: ".5",
+          max: "2",
+          step: ".5",
+          defaultValue: ".5",
         }}
       />
 

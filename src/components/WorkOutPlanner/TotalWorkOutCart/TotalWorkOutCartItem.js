@@ -6,8 +6,9 @@ const TotalWorkOutCartItem = (props) => {
     <li>
       <div className={styles.TotalWorkOutCartItem}>
         <h3>{props.type}</h3>
-        <p>Number of Rounds: {props.amount}</p>
-        <p>Minutes Per Round: {props.lengthOfRounds}</p>
+        <p>Rounds: {props.amount}</p>
+        <p>Time: {props.lengthOfRounds}</p>
+        <p>Rest: {props.rest}</p>
 
         <PageButton onClick={props.onRemove}>X</PageButton>
       </div>

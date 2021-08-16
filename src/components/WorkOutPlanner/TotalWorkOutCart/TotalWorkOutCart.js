@@ -8,6 +8,8 @@ const TotalWorkOutCart = (props) => {
   const workOutCtx = useContext(TotalWorkOutContext);
   const hasWorkOuts = workOutCtx.workOuts.length > 0;
 
+  console.log(workOutCtx.workOuts[0]);
+
   const workOutCartRemoveHandler = (id) => {
     workOutCtx.removeWorkOut(id);
   };
@@ -20,6 +22,7 @@ const TotalWorkOutCart = (props) => {
           type={workOut.type}
           amount={workOut.amount}
           lengthOfRounds={workOut.lengthOfRounds}
+          rest={workOut.rest}
           onRemove={workOutCartRemoveHandler.bind(null, workOut.id)}
         />
       ))}

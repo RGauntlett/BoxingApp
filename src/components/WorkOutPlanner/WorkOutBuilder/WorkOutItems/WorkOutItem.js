@@ -7,13 +7,13 @@ import WorkOutItemForm from "./WorkOutItemForm";
 const WorkOutItem = (props) => {
   const workOutCtx = useContext(TotalWorkOutContext);
 
-  const addToTotalWorkOutHandler = (amount, lengthOfRounds) => {
-    console.log(amount);
+  const addToTotalWorkOutHandler = (amount, lengthOfRounds, rest) => {
     workOutCtx.addWorkOut({
       id: props.id,
       type: props.type,
       amount: amount,
       lengthOfRounds: lengthOfRounds,
+      rest: rest,
       description: props.description,
     });
   };

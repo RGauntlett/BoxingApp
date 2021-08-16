@@ -10,43 +10,16 @@ const CountDownTimer = (props) => {
   );
   const [roundCounter, setRoundCounter] = useState(0);
 
-  let minutes = Math.floor(roundTime);
-  let seconds = (roundTime * 60) % 60;
-  // For the number of rounds add a round object to the rounds array
-  // const [[mins, secs], setTime] = useState([minutes, seconds]);
-  // const [roundCounter, setRoundCounter] = useState(0);
-
-  // const tick = (timerId) => {
-  //   if (customWorkOut.length === roundCounter && mins === 0 && secs === 0) {
-  //     clearInterval(timerId);
-  //     return <Redirect to="/Home" />;
-  //   } else if (mins === 0 && secs === 0) {
-  //     setRoundCounter(roundCounter + 1);
-  //     newTimer(roundCounter + 1);
-  //   } else if (secs === 0) {
-  //     setTime([mins - 1, 59]);
-  //   } else {
-  //     setTime([mins, secs - 1]);
-  //   }
-  // };
-
-  // React.useEffect(() => {
-  //   const timerId = setInterval(() => tick(timerId), 1000);
-  //   return () => clearInterval(timerId);
-  // });
-
-  // const newTimer = (roundCounter) => {
-  //   minutes = Math.floor(customWorkOut[roundCounter].lengthOfRounds);
-  //   seconds = (customWorkOut[roundCounter].lengthOfRounds * 60) % 60;
-  //   setTime([minutes, seconds]);
-  // };
+  let endWorkOut = props.onEndWorkOut;
 
   useEffect(() => {
     const Tick = (roundTime) => {
-      if (roundTime === 0) {
+      if (roundTime === 0 && roundCounter === customWorkOut.length - 1) {
+        setRoundCounter(0);
+        setRoundTime(customWorkOut[roundCounter].lengthOfRounds * 60);
+      } else if (roundTime === 0) {
         setRoundCounter(roundCounter + 1);
         setRoundTime(customWorkOut[roundCounter].lengthOfRounds * 60);
-        setCustomWorkOut([]);
       } else setRoundTime(roundTime - 1);
     };
 
@@ -54,7 +27,7 @@ const CountDownTimer = (props) => {
       Tick(roundTime);
     }, 1000);
     return () => clearTimeout(timer);
-  }, [roundTime]);
+  }, [roundTime, customWorkOut, roundCounter, endWorkOut]);
 
   return (
     <div>
@@ -91,7 +64,7 @@ const CountDownTimer = (props) => {
                 <div className={styles.RoundCounter}>
                   <h2>Round:</h2>
                   <p>
-                    {0 + 1}/{customWorkOut.length}
+                    {roundCounter + 1}/{customWorkOut.length}
                   </p>
                 </div>
               </div>
@@ -123,22 +96,21 @@ const CreateRoundsList = () => {
   const endOfWorkOutHandler = () => {
     setTotalWorkOut([]);
   };
-
-  return (
-    <div>
+  if (totalWorkOut.length === 0) {
+    return <p>Please Enter Workouts to Build Your Routine</p>;
+  } else
+    return (
       <div>
-        {totalWorkOut.length > 0 && (
-          <CountDownTimer
-            routine={totalWorkOut}
-            onEndWorkOut={endOfWorkOutHandler}
-          />
-        )}
-        {totalWorkOut.length === 0 && (
-          <p>Please Enter Workouts to Build Your Routine</p>
-        )}
+        <div>
+          {totalWorkOut.length > 0 && (
+            <CountDownTimer
+              routine={totalWorkOut}
+              onEndWorkOut={endOfWorkOutHandler}
+            />
+          )}
+        </div>
       </div>
-    </div>
-  );
+    );
 };
 
 export default CreateRoundsList;

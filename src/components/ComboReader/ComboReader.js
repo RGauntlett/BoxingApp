@@ -41,7 +41,7 @@ const ComboReader = (timePerCombo) => {
   }, [ComboArray]);
 
   useEffect(() => {
-    const timer = setInterval(() => randomizer(), 4000);
+    const timer = setInterval(() => randomizer(), 6000);
     return () => clearInterval(timer);
   }, [combo, randomizer]);
 
