@@ -1,6 +1,16 @@
-.homeIMG {
+.HomePage div {
   display: flex;
   justify-content: center;
-  height: 40em;
-  width: 100rem;
+  margin-top: 20;
+}
+
+.HomePage img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60%;
+}
+
+.HomePage h1 {
+  color: #ccad8f;
 }

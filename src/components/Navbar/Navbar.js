@@ -22,7 +22,9 @@ const Navbar = () => {
 
   return (
     <nav className="NavbarItems">
-      <h1 className="Logo">NBRHD</h1>
+      <LinkContainer to="/home">
+        <h1 className="Logo">NBRHD</h1>
+      </LinkContainer>
       <div className="MenuIcon" onClick={clickedHandler}>
         <i className={icon}></i>
       </div>
