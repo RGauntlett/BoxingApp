@@ -3,11 +3,9 @@ import TotalWorkOutProvider from "./store/TotalWorkOutProvider";
 
 function App() {
   return (
-    <div className="App">
-      <TotalWorkOutProvider>
-        <Routes />
-      </TotalWorkOutProvider>
-    </div>
+    <TotalWorkOutProvider>
+      <Routes />
+    </TotalWorkOutProvider>
   );
 }
 

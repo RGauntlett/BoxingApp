@@ -4,10 +4,12 @@ import PageButton from "../../UI/PageButton";
 import WorkOuts from "../WorkOutBuilder/WorkOuts";
 import TotalWorkOutCart from "../TotalWorkOutCart/TotalWorkOutCart";
 import styles from "./HomePage.module.css";
+import Navbar from "../../Navbar/Navbar";
 
-const HomePage = (props) => {
+const BuildYourWorkOut = (props) => {
   return (
     <Container>
+      <Navbar />
       <Row>
         <Col className={styles.HomePage}>
           <div>
@@ -34,4 +36,4 @@ const HomePage = (props) => {
   );
 };
 
-export default HomePage;
+export default BuildYourWorkOut;

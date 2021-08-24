@@ -2,13 +2,15 @@ import ReactPlayer from "react-player/youtube";
 import { LinkContainer } from "react-router-bootstrap";
 import PageButton from "../UI/PageButton";
 import styles from "./Information.module.css";
+import Navbar from "../Navbar/Navbar";
 
 const Information = () => {
   return (
     <div className={styles.InformationPage}>
+      <Navbar />
       <div className={styles.Title}>
         <h1>Learn To Box!</h1>
-        <LinkContainer to="/Home">
+        <LinkContainer to="/buildyourworkout">
           <PageButton>Build My Workout!</PageButton>
         </LinkContainer>
         <div className={styles.PunchNumbers}>

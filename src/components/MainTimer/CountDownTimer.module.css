@@ -52,3 +52,13 @@
   border: 0.3rem solid #ccad8f;
   color: white;
 }
+
+.RestTimer {
+  border: 0.3rem solid #ccad8f;
+  color: white;
+}
+
+.RestTimer p {
+  font-size: xx-large;
+  font-weight: bold;
+}

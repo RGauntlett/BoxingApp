@@ -1,36 +1,77 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import TotalWorkOutContext from "../../store/TotalWorkOut-context";
 import ComboReader from "../ComboReader/ComboReader";
 import styles from "./CountDownTimer.module.css";
+import Modal from "../UI/Modal";
+import PageButton from "../UI/PageButton";
+import useSound from "use-sound";
+import BoxingTimerSfx from "../../Assets/BoxingTimerBell.mp3";
+import Ding from "../../Assets/Ding.wav";
 
 const CountDownTimer = (props) => {
-  const [customWorkOut, setCustomWorkOut] = useState(props.routine);
+  const customWorkOut = props.routine;
   const [roundTime, setRoundTime] = useState(
     customWorkOut[0].lengthOfRounds * 60
   );
+  const [restTime, setRestTime] = useState(customWorkOut[0].rest * 60);
   const [roundCounter, setRoundCounter] = useState(0);
+  const [appIsPaused, setAppIsPaused] = useState(false);
+  const [splitRoundTimer, setSplitRoundTimer] = useState(
+    customWorkOut[0].lengthOfRounds * 60
+  );
 
-  let endWorkOut = props.onEndWorkOut;
+  const pauseHandler = () => {
+    setAppIsPaused(true);
+  };
 
-  useEffect(() => {
-    const Tick = (roundTime) => {
-      if (roundTime === 0 && roundCounter === customWorkOut.length - 1) {
-        setRoundCounter(0);
-        setRoundTime(customWorkOut[roundCounter].lengthOfRounds * 60);
-      } else if (roundTime === 0) {
-        setRoundCounter(roundCounter + 1);
-        setRoundTime(customWorkOut[roundCounter].lengthOfRounds * 60);
-      } else setRoundTime(roundTime - 1);
-    };
+  const resumeHandler = () => {
+    setAppIsPaused(false);
+  };
 
-    const timer = setTimeout(() => {
-      Tick(roundTime);
-    }, 1000);
-    return () => clearTimeout(timer);
-  }, [roundTime, customWorkOut, roundCounter, endWorkOut]);
+  const Tick = ([roundTime, restTime]) => {
+    if (appIsPaused === true) {
+      return roundTime;
+    } else if (
+      roundTime === 0 &&
+      restTime === 0 &&
+      roundCounter === customWorkOut.length - 1
+    ) {
+      setRoundCounter(0);
+      setRoundTime(customWorkOut[roundCounter].lengthOfRounds * 60);
+      setRestTime(customWorkOut[roundCounter].rest * 60);
+    } else if (roundTime === 0 && restTime === 0) {
+      setRoundCounter(roundCounter + 1);
+      setRoundTime(customWorkOut[roundCounter].lengthOfRounds * 60);
+      setRestTime(customWorkOut[roundCounter].rest * 60);
+      setSplitRoundTimer(customWorkOut[roundCounter].lengthOfRounds * 60);
+    } else if (roundTime === 0) {
+      setRestTime(restTime - 1);
+    } else setRoundTime(roundTime - 1);
+  };
+
+  const [playRoundStartFinish] = useSound(BoxingTimerSfx, { volume: 0.25 });
+  const [playDing] = useSound(Ding, { volume: 0.25 });
+
+  if (roundTime === 3 || restTime === 3) {
+    playDing();
+  } else if (roundTime === 2 || restTime === 2) {
+    playDing();
+  } else if (roundTime === 1 || restTime === 1) {
+    playDing();
+    setTimeout(() => playRoundStartFinish(), 1000);
+  }
+
+  if (customWorkOut[roundCounter].type === "Split Rounds") {
+    if (splitRoundTimer / 2 === roundTime) {
+      playDing();
+    }
+  }
+
+  setTimeout(() => Tick([roundTime, restTime]), 1000);
 
   return (
     <div>
+      {appIsPaused && <Modal onResume={resumeHandler} />}
       {!customWorkOut.length > 0 && (
         <p>Please Enter Workouts to Build Your Routine</p>
       )}
@@ -59,7 +100,17 @@ const CountDownTimer = (props) => {
                 </div>
                 <div className={styles.LengthReader}>
                   <h2>Length Of Round: </h2>
-                  <p>{customWorkOut[roundCounter].lengthOfRounds}</p>
+                  <p>
+                    {Math.floor(
+                      (customWorkOut[roundCounter].lengthOfRounds * 60) / 60
+                    )
+                      .toString()
+                      .padStart(2, "0")}
+                    :
+                    {((customWorkOut[roundCounter].lengthOfRounds * 60) % 60)
+                      .toString()
+                      .padStart(2, "0")}
+                  </p>
                 </div>
                 <div className={styles.RoundCounter}>
                   <h2>Round:</h2>
@@ -67,16 +118,26 @@ const CountDownTimer = (props) => {
                     {roundCounter + 1}/{customWorkOut.length}
                   </p>
                 </div>
+                <div className={styles.RestTimer}>
+                  <h2>Rest Timer:</h2>
+                  <p>
+                    {Math.floor(restTime / 60)
+                      .toString()
+                      .padStart(2, "0")}
+                    :{(restTime % 60).toString().padStart(2, "0")}
+                  </p>
+                </div>
               </div>
             </div>
           )}
         </div>
-      )}
+      )}{" "}
+      <PageButton onClick={pauseHandler}>Pause WorkOut</PageButton>
     </div>
   );
 };
 
-const CreateRoundsList = () => {
+const CreateRoundsList = (props) => {
   const workOutCtx = useContext(TotalWorkOutContext);
 
   // Create array of rounds
@@ -87,6 +148,7 @@ const CreateRoundsList = () => {
       roundsList.push({
         type: workOut.type,
         lengthOfRounds: workOut.lengthOfRounds,
+        rest: workOut.rest,
       });
     }
   });
@@ -96,6 +158,7 @@ const CreateRoundsList = () => {
   const endOfWorkOutHandler = () => {
     setTotalWorkOut([]);
   };
+
   if (totalWorkOut.length === 0) {
     return <p>Please Enter Workouts to Build Your Routine</p>;
   } else
