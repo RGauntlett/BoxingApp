@@ -32,3 +32,13 @@
   align-items: center;
   margin-right: 5%;
 }
+
+@media screen and (max-width: 750px) {
+  .TotalWorkOutCartItem h3 {
+    font-size: normal;
+  }
+
+  .TotalWorkOutCartItem p {
+    font-size: small;
+  }
+}

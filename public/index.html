@@ -1,4 +1,4 @@
-<html lang="en">
+<html lang="en" style="min-height: 100%">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -18,9 +18,9 @@
 
     <title>React App</title>
   </head>
-  <body>
+  <body style="min-height: 100%">
     <div id="overlays"></div>
-    <div id="root"></div>
+    <div id="root" style="min-height: 100%"></div>
 
     <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="/__/firebase/8.10.0/firebase-app.js"></script>
@@ -31,5 +31,16 @@
 
     <!-- Initialize Firebase -->
     <script src="/__/firebase/init.js"></script>
+
+    <!-- EmailJS -->
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"
+    ></script>
+    <script type="text/javascript">
+      (function () {
+        emailjs.init("YOUR_USER_ID");
+      })();
+    </script>
   </body>
 </html>

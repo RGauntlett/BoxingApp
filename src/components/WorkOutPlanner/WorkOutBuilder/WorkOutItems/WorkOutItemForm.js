@@ -38,47 +38,50 @@ const WorkOutItemForm = (props) => {
 
   return (
     <form className={styles.form}>
-      <Input
-        ref={amountInputRef}
-        label="Rounds: "
-        input={{
-          id: "amount_" + props.id,
-          type: "number",
-          min: "1",
-          max: "12",
-          step: "1",
-          defaultValue: "1",
-        }}
-      />
-      <Input
-        ref={lengthInputRef}
-        label="Time: "
-        input={{
-          id: "length_" + props.id,
-          type: "number",
-          min: ".5",
-          max: "5",
-          step: ".5",
-          defaultValue: "1",
-        }}
-      />
+      <div>
+        <Input
+          ref={amountInputRef}
+          label="Rounds: "
+          input={{
+            id: "amount_" + props.id,
+            type: "number",
+            min: "1",
+            max: "12",
+            step: "1",
+            defaultValue: "1",
+          }}
+        />
+        <Input
+          ref={lengthInputRef}
+          label="Time: "
+          input={{
+            id: "length_" + props.id,
+            type: "number",
+            min: ".5",
+            max: "5",
+            step: ".5",
+            defaultValue: "1",
+          }}
+        />
+      </div>
+      <div>
+        <Input
+          ref={restInputRef}
+          label="Rest: "
+          input={{
+            id: "rest_" + props.id,
+            type: "number",
+            min: ".5",
+            max: "2",
+            step: ".5",
+            defaultValue: ".5",
+          }}
+        />
 
-      <Input
-        ref={restInputRef}
-        label="Rest: "
-        input={{
-          id: "rest_" + props.id,
-          type: "number",
-          min: ".5",
-          max: "2",
-          step: ".5",
-          defaultValue: ".5",
-        }}
-      />
-
-      <PageButton className="px-3" onClick={submitHandler}>
-        Add
-      </PageButton>
+        <PageButton className="px-3" onClick={submitHandler}>
+          Add
+        </PageButton>
+      </div>
       {!amountIsValid && <p>Please Enter A Valid Amount (1-12)</p>}
     </form>
   );

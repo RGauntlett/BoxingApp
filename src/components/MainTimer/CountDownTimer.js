@@ -77,7 +77,7 @@ const CountDownTimer = (props) => {
       )}
       {customWorkOut.length !== 0 && (
         <div>
-          {customWorkOut[roundCounter].type === "Guided ShadowBoxing" && (
+          {customWorkOut[roundCounter].type === "Guided Shadow Boxing" && (
             <div className={styles.ComboReader}>
               <ComboReader timePerCombo={{ seconds: 1000 }} />
             </div>
@@ -132,7 +132,9 @@ const CountDownTimer = (props) => {
           )}
         </div>
       )}{" "}
-      <PageButton onClick={pauseHandler}>Pause WorkOut</PageButton>
+      <div className={styles.PauseButton}>
+        <PageButton onClick={pauseHandler}>Pause WorkOut</PageButton>
+      </div>
     </div>
   );
 };

@@ -6,11 +6,11 @@ const WorkOuts = [
   {
     id: "_" + Math.random().toString(36).substr(2, 9),
     type: "Basic Timer",
-    description: "Basic boxing timer with warnings at 10 seconds",
+    description: "Basic boxing timer with warnings at 3 seconds",
   },
   {
     id: "_" + Math.random().toString(36).substr(2, 9),
-    type: "Guided ShadowBoxing",
+    type: "Guided Shadow Boxing",
     description:
       "Basic boxing timer with random combinations called on screen for you to follow",
   },

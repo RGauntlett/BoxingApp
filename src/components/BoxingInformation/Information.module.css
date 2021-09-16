@@ -1,42 +1,45 @@
 .InformationPage {
   margin: 3%;
   margin-top: 0%;
-  display: flex;
+  display: grid;
+  justify-content: center;
+}
+
+.InformationPage h2 {
+  margin-right: 1%;
+  color: #ccad8f;
+  font-size: 3rem;
+  display: grid;
   justify-content: center;
 }
 
 .Title {
   margin: 3%;
   margin-top: 0%;
-}
-
-.Title button {
-  height: fit-content;
-}
-
-.InformationPage h1 {
-  margin-right: 1%;
-  color: #ccad8f;
-  font-size: 4rem;
+  display: grid;
+  justify-content: center;
 }
 
 .PunchNumbers {
-  justify-content: center;
   color: white;
 }
 .PunchNumbers h3 {
-  display: block;
   color: white;
   text-decoration: underline;
+  display: grid;
+  justify-content: center;
 }
 .PunchNumbers p {
-  display: block;
+  display: grid;
+  justify-content: center;
+}
+.PunchNumbers ul {
+  display: grid;
+  justify-content: center;
 }
 
 .Library {
-  display: inline-block;
   justify-content: center;
   margin: 3%;
-
   color: white;
 }

@@ -1,19 +1,28 @@
 .form {
-  text-align: right;
   display: flex;
-  align-content: flex-end;
-  justify-content: space-between;
+  justify-content: space-evenly;
+}
+
+.form div {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 50%;
+}
+
+.form input {
+  margin: 2%;
 }
 
 .form label {
   color: white;
   font-size: small;
-  padding-left: 5%;
   margin-right: 5%;
 }
 
 .form input {
   margin-right: 5%;
+  padding-right: 5%;
   margin-left: 5%;
   max-width: fit-content;
 }
@@ -35,4 +44,25 @@
 .form button:active {
   background-color: #ccad8f;
   border-color: #ccad8f;
+}
+
+@media screen and (max-width: 750px) {
+  .form {
+    display: flex;
+    justify-content: space-evenly;
+  }
+
+  .form div {
+    display: grid;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+
+  .form input {
+    width: fit-content;
+  }
+
+  .form button {
+    width: fit-content;
+  }
 }
